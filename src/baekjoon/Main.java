@@ -7,8 +7,8 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) throws IOException{
 
-        baekjoon10773 baekjoon10773 = new baekjoon10773();
+        baekjoon9012 baekjoon9012 = new baekjoon9012();
 
-        baekjoon10773.answer();
+        baekjoon9012.answer();
     }
 }

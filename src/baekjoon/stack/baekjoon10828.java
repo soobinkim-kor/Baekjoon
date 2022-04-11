@@ -11,6 +11,7 @@ public class baekjoon10828 {
 
         int commands = Integer.parseInt(br.readLine());
         Stack<Integer> stack= new Stack<>();
+        //조건 경우 잘 생각
         for(int i=0;i<commands;i++){
             String[] command= br.readLine().split(" ");
             if(command[0].contains("push")){

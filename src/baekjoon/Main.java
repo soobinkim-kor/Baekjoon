@@ -1,14 +1,14 @@
 package baekjoon;
 
-import baekjoon.stack.*;
+import baekjoon.silver4.*;
 
 import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws IOException{
 
-        baekjoon9012 baekjoon9012 = new baekjoon9012();
+        baek1181 baek1181 = new baek1181();
 
-        baekjoon9012.answer();
+        baek1181.answer();
     }
 }

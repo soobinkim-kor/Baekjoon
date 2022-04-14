@@ -27,8 +27,20 @@ public class baek1181 {
             }
         });
 
-        for(String data:words){
-            wr.write(data+"\n");
+        for(int i=0;i<n;i++){
+            if(i==n-1){
+                wr.write(words[i]);
+                break;
+            }
+
+            else if(words[i].equals(words[i+1])){
+                continue;
+            }
+
+            else{
+                wr.write(words[i]+"\n");
+            }
+
         }
         wr.close();
     }

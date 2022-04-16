@@ -41,34 +41,54 @@ public class baek1012 {
 
             for(int x=0;x<field.length;i++){
                 for(int y=0;y<field[0].length;y++){
-                    if(visited[x][y]==false&&field[x][y]==1){
+                    if(!visited[x][y]&&field[x][y]==1){
                         Integer[] loc = {x,y};
                         deque.add(loc);
                         while(!deque.isEmpty()){
                             Integer[] space = deque.poll();
                             // 아래 배추가 1인 경우
-                            if(field[space[0]+1][space[1]]==1&&visited[space[0]+1][space[1]]==false){
+
+                            if(field[space[0]+1][space[1]]==1&&!visited[space[0]+1][space[1]]){
+                                if(space[0]+1>=height){
+                                    break;
+                                }
+
                                 visited[space[0]+1][space[1]]=true;
-                                Integer[] newloc = {space[0]+1,space[1]};
-                                deque.add(newloc);
+                                Integer[] newLoc = {space[0]+1,space[1]};
+                                deque.add(newLoc);
+                            }
+                            // 오른쪽 배추가 1인 경우
+
+                            if(field[space[0]][space[1]+1]==1&&!visited[space[0]][space[1]+1]){
+                                if(space[1]+1>=width){
+                                    break;
+                                }
+
+                                visited[space[0]][space[1]+1]=true;
+                                Integer[] newLoc = {space[0],space[1]+1};
+                                deque.add(newLoc);
                             }
 
-                            if(field[space[0]+1][space[1]]==1&&visited[space[0]+1][space[1]]==false){
-                                visited[space[0]+1][space[1]]=true;
-                                Integer[] newloc = {space[0]+1,space[1]};
-                                deque.add(newloc);
+                            // 위 배추가 1인 경우
+                            if(field[space[0]-1][space[1]]==1&&!visited[space[0]-1][space[1]]){
+                                if(space[0]-1<0){
+                                    break;
+                                }
+
+                                visited[space[0]-1][space[1]]=true;
+                                Integer[] newLoc = {space[0]-1,space[1]};
+                                deque.add(newLoc);
                             }
 
-                            if(field[space[0]+1][space[1]]==1&&visited[space[0]+1][space[1]]==false){
-                                visited[space[0]+1][space[1]]=true;
-                                Integer[] newloc = {space[0]+1,space[1]};
-                                deque.add(newloc);
-                            }
+                            // 왼쪽 배추가 1인 경우
+                            if(field[space[0]][space[1]-1]==1&&!visited[space[0]][space[1]-1]){
+                                if(space[1]-1<0){
+                                    break;
+                                }
 
-                            if(field[space[0]+1][space[1]]==1&&visited[space[0]+1][space[1]]==false){
-                                visited[space[0]+1][space[1]]=true;
-                                Integer[] newloc = {space[0]+1,space[1]};
-                                deque.add(newloc);
+                                visited[space[0]][space[1]-1]=true;
+                                Integer[] newLoc = {space[0],space[1]-1};
+                                deque.add(newLoc);
                             }
                         }
                     }

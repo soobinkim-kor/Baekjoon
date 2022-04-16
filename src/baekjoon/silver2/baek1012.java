@@ -43,15 +43,16 @@ public class baek1012 {
 
             for(int j=0;j<cabbage;j++){
                 String[] info = br.readLine().split(" ");
-
                 field[Integer.parseInt(info[0])][Integer.parseInt(info[1])]=1;
             }
 
             for(int x=0;x<field.length;x++){
                 for(int y=0;y<field[0].length;y++){
                     if(field[x][y]==1 && !visited[x][y]){
-                        dfs(x,y);
+                        //dfs(x,y);
+                        bfs(x,y);
                         answer+=1;
+                        System.out.println("**");
                     }
                 }
             }
@@ -89,6 +90,38 @@ public class baek1012 {
             if(newx>=0 && newy>=0 && newx<height && newy<width){
                 if(!visited[newx][newy] && field[newx][newy]==1){
                     dfs(newx,newy);
+                }
+            }
+        }
+    }
+
+    public static void bfs(int x, int y){
+        Deque<Integer[]> deque = new LinkedList<>();
+        deque.add(new Integer[]{x,y});
+
+        while(!deque.isEmpty()){
+            // 1.
+//            x=deque.peek()[0];
+//            y=deque.peek()[1];
+//            System.out.println(x+" "+y);
+//            visited[x][y]=true;
+//            deque.poll();
+
+            // 2.
+            Integer[] current = deque.poll();
+            System.out.println(current[0]+" "+current[1]);
+            visited[current[0]][current[1]]=true;
+
+            for(int i=0;i<4;i++){
+                int newx = x+dx[i];
+                int newy = y+dy[i];
+
+                if(newx>=0 && newy>=0 && newx<height && newy<width){
+                    if(!visited[newx][newy] && field[newx][newy]==1){
+
+                        deque.add(new Integer[]{newx,newy});
+                        visited[newx][newy]=true;
+                    }
                 }
             }
         }

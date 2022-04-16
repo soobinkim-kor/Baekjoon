@@ -1,8 +1,10 @@
 package baekjoon.silver2;
 
 import java.io.*;
+import java.util.LinkedList;
 import java.util.StringTokenizer;
 import java.util.Deque;
+import java.util.Stack;
 public class baek1012 {
     /*
     * ***알고리즘***
@@ -15,19 +17,25 @@ public class baek1012 {
     static boolean[][] visited;
     static StringTokenizer st;
     static Deque<Integer[]> deque;
+    static Stack<int[]> stack;
 
+    static int height;
+    static int width;
+    // 상 하 좌 우
+    static int[] dx={-1,1,0,0};
+    static int[] dy={0,0,-1,1};
     public static void answer() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter wr = new BufferedWriter(new OutputStreamWriter(System.out));
 
         testcase=Integer.parseInt(br.readLine());
+
         for(int i=0;i<testcase;i++){
-            System.out.println(i+1+" 번째 field");
+            int answer=0;
             String location = br.readLine();
             st = new StringTokenizer(location);
-            System.out.println(location);
-            int height=Integer.parseInt(st.nextToken());
-            int width=Integer.parseInt(st.nextToken());
+            height=Integer.parseInt(st.nextToken());
+            width=Integer.parseInt(st.nextToken());
             int cabbage = Integer.parseInt(st.nextToken());
 
             field=new int[height][width];
@@ -39,63 +47,19 @@ public class baek1012 {
                 field[Integer.parseInt(info[0])][Integer.parseInt(info[1])]=1;
             }
 
-            for(int x=0;x<field.length;i++){
+            for(int x=0;x<field.length;x++){
                 for(int y=0;y<field[0].length;y++){
-                    if(!visited[x][y]&&field[x][y]==1){
-                        Integer[] loc = {x,y};
-                        deque.add(loc);
-                        while(!deque.isEmpty()){
-                            Integer[] space = deque.poll();
-                            // 아래 배추가 1인 경우
-
-                            if(field[space[0]+1][space[1]]==1&&!visited[space[0]+1][space[1]]){
-                                if(space[0]+1>=height){
-                                    break;
-                                }
-
-                                visited[space[0]+1][space[1]]=true;
-                                Integer[] newLoc = {space[0]+1,space[1]};
-                                deque.add(newLoc);
-                            }
-                            // 오른쪽 배추가 1인 경우
-
-                            if(field[space[0]][space[1]+1]==1&&!visited[space[0]][space[1]+1]){
-                                if(space[1]+1>=width){
-                                    break;
-                                }
-
-                                visited[space[0]][space[1]+1]=true;
-                                Integer[] newLoc = {space[0],space[1]+1};
-                                deque.add(newLoc);
-                            }
-
-                            // 위 배추가 1인 경우
-                            if(field[space[0]-1][space[1]]==1&&!visited[space[0]-1][space[1]]){
-                                if(space[0]-1<0){
-                                    break;
-                                }
-
-                                visited[space[0]-1][space[1]]=true;
-                                Integer[] newLoc = {space[0]-1,space[1]};
-                                deque.add(newLoc);
-                            }
-
-                            // 왼쪽 배추가 1인 경우
-                            if(field[space[0]][space[1]-1]==1&&!visited[space[0]][space[1]-1]){
-                                if(space[1]-1<0){
-                                    break;
-                                }
-
-                                visited[space[0]][space[1]-1]=true;
-                                Integer[] newLoc = {space[0],space[1]-1};
-                                deque.add(newLoc);
-                            }
-                        }
+                    if(field[x][y]==1 && !visited[x][y]){
+                        dfs(x,y);
+                        answer+=1;
                     }
                 }
             }
+            wr.write(answer+"\n");
         }
+        wr.close();
     }
+
     public static void printField(int[][] field){
         for(int i=0;i<field.length;i++){
             System.out.print("[");
@@ -113,6 +77,20 @@ public class baek1012 {
                 System.out.print(visited[i][j]+", ");
             }
             System.out.print("]\n");
+        }
+    }
+
+    public static void dfs(int x, int y){
+        visited[x][y] = true;
+        for(int i=0; i<4; i++){
+            int newx=x+dx[i];
+            int newy=y+dy[i];
+
+            if(newx>=0 && newy>=0 && newx<height && newy<width){
+                if(!visited[newx][newy] && field[newx][newy]==1){
+                    dfs(newx,newy);
+                }
+            }
         }
     }
 }

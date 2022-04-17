@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
 import java.util.Deque;
-import java.util.Stack;
+
 public class baek1012 {
     /*
     * ***알고리즘***
@@ -16,8 +16,6 @@ public class baek1012 {
     static int[][] field;
     static boolean[][] visited;
     static StringTokenizer st;
-    static Deque<Integer[]> deque;
-    static Stack<int[]> stack;
 
     static int height;
     static int width;
@@ -52,7 +50,6 @@ public class baek1012 {
                         //dfs(x,y);
                         bfs(x,y);
                         answer+=1;
-                        System.out.println("**");
                     }
                 }
             }
@@ -100,21 +97,13 @@ public class baek1012 {
         deque.add(new Integer[]{x,y});
 
         while(!deque.isEmpty()){
-            // 1.
-//            x=deque.peek()[0];
-//            y=deque.peek()[1];
-//            System.out.println(x+" "+y);
-//            visited[x][y]=true;
-//            deque.poll();
 
-            // 2.
             Integer[] current = deque.poll();
-            System.out.println(current[0]+" "+current[1]);
             visited[current[0]][current[1]]=true;
 
             for(int i=0;i<4;i++){
-                int newx = x+dx[i];
-                int newy = y+dy[i];
+                int newx = current[0]+dx[i];
+                int newy = current[1]+dy[i];
 
                 if(newx>=0 && newy>=0 && newx<height && newy<width){
                     if(!visited[newx][newy] && field[newx][newy]==1){

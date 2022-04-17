@@ -20,7 +20,7 @@ public class baek1260 {
             int temp=queue.poll();
 
             for(int i=0;i<connected.length;i++){
-                if(visited[i]==false && connected[temp][i]==true){
+                if(!visited[i] && !connected[temp][i]){
                     queue.add(i);
                     visited[i]=true;
                     wr.write(String.valueOf(i+1)+" ");

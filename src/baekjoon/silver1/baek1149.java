@@ -4,8 +4,12 @@ import java.io.*;
 import java.util.Deque;
 import java.util.LinkedList;
 
+import static java.lang.Math.min;
+
 public class baek1149 {
     static House[] houseList;
+    static String[] colors={"Red","Green","Blue"};
+    static int price=0;
     public void answer()throws IOException{
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -27,21 +31,24 @@ public class baek1149 {
             System.out.println("집의 색: "+data.getColor()+" 빨강비용: "+data.getToRed()+" 초록비용: "+data.getToGreen()+" 파랑비용: "+data.getToBlue());
         }
 
-
-
-    }
-
-    public static void bfs(int x){
-        Deque<House> deque=new LinkedList<>();
-        deque.add(houseList[x]);
-        while(!deque.isEmpty()){
-            House polledHouse=deque.poll();
-            for(int i=x;i< houseList.length;i++){
-
-            }
+        for(int i=0;i<3;i++){
+            price=min(price,bfs(colors[i]));
         }
 
+        System.out.println(price);
+    }
 
+    public static int bfs(String firstHouseColor){
+        Deque<House> deque=new LinkedList<>();
+        House house = houseList[0];
+        house.setColor(firstHouseColor);
+
+        deque.add(house);
+        while(!deque.isEmpty()){
+            House polledHouse=deque.poll();
+
+        }
+        return 0;
     }
 
     public class House{

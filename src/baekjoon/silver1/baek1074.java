@@ -24,42 +24,44 @@ public class baek1074 {
         wr.write(answer+"");
         wr.close();
     }
+    /*
+    * 사분면
+    *  1 2
+    *  3 4
+    *
+    */
 
     static void find(int r, int c, int size){
         if(size==1){
             return;
         }
 
-        // r,c 가 4사분면 일 때
-
+        // r,c 가 1사분면 일 때
         if( r < size/2 && c < size/2){
             find(r,c,size/2);
         }
 
 
-        // r,c 가 1사분면 일 때
+        // r,c 가 2사분면 일 때
 
-        else if( r > size/2 && c <= size/2){
+        else if( r < size/2 && c >= size/2){
             find(r,c-size/2,size/2);
             answer+=size*size/4;
         }
 
 
-        // r,c 가 2사분면 일 때
-
-        else if ( r >= size/2 && c > size/2){
+        // r,c 가 3사분면 일 때
+        else if ( r >= size/2 && c < size/2){
             find(r-size/2,c,size/2);
-            answer+=size*size/4
+            answer+=size*size/4*2;
         }
 
 
-        // r,c 가 3사분면 일 때
-
+        // r,c 가 4사분면 일 때
         else{
             find(r-size/2,c-size/2,size/2);
+            answer+=size*size/4*3;
         }
-
-        return 0;
     }
 
 }

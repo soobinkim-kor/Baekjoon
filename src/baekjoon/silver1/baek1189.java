@@ -1,9 +1,6 @@
 package baekjoon.silver1;
 
 import java.io.*;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.Stack;
 
 public class baek1189 {
     // 0,0 시작 -> r,c 도착
@@ -43,41 +40,27 @@ public class baek1189 {
         }
 
 
-        dfs(0,0);
-        print(road);
-        System.out.println(answer);
+        dfs(0,0,1);
+        wr.write(answer+"");
+        wr.close();
     }
 
-    public static void dfs(int x, int y){
-        Stack<Integer[]> stack = new Stack<>();
-        stack.push(new Integer[]{x,y});
-        int steps=0;
-
-        while(!stack.isEmpty()){
-
-
-
-
-            Integer[] current = stack.pop();
-            if(current[0]==r-1&& current[1]==c-1){
-                System.out.println("도착");
-
-                if(steps==k){
-                    answer+=1;
-                }
+    public static void dfs(int x, int y, int moved){
+        if(x==r-1 && y==c-1){
+            if(moved==k){
+                answer++;
             }
-            visited[current[0]][current[1]]=true;
-            System.out.println(current[0]+" "+current[1]+" 방문 "+ steps);
-            for(int i=0;i<4;i++){
-                int newX = current[0]+dx[i];
-                int newY = current[1]+dy[i];
+            return;
+        }
 
-                if(newX>=0 && newY>=0 && newX<r && newY<c){
-                    if(!visited[newX][newY] && road[newX][newY]!=-1){
-                        visited[newX][newY]=true;
-                        stack.push(new Integer[]{newX,newY});
-                        steps+=1;
-                    }
+        for(int i=0;i<4;i++){
+            int newX=x+dx[i];
+            int newY=y+dy[i];
+            if(newX>=0 && newY>=0 && newX<r && newY<c){
+                if(!visited[newX][newY] && road[newX][newY]==1){
+                    visited[newX][newY]=true;
+                    dfs(newX,newY,moved+1);
+                    visited[newX][newY]=false;
                 }
             }
         }

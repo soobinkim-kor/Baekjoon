@@ -34,7 +34,6 @@ public class baek10866 {
         BufferedWriter wr = new BufferedWriter(new OutputStreamWriter(System.out));
         int commands = Integer.parseInt(br.readLine());
 
-
         deque = new LinkedList<>();
 
         for(int i=0;i<commands;i++){
@@ -51,17 +50,21 @@ public class baek10866 {
             else if(command[0].equals("pop_front")){
                 if(deque.isEmpty()){
                     wr.write("-1\n");
-                    break;
                 }
-                wr.write(deque.pollFirst() +"\n");
+                else{
+                    wr.write(deque.pollFirst() +"\n");
+                }
+
             }
 
             else if(command[0].equals("pop_back")){
                 if(deque.isEmpty()){
                     wr.write("-1\n");
-                    break;
                 }
-                wr.write(deque.pollLast() +"\n");
+                else{
+                    wr.write(deque.pollLast() +"\n");
+                }
+
             }
 
             else if(command[0].equals("size")){
@@ -71,7 +74,6 @@ public class baek10866 {
             else if(command[0].equals("empty")){
                 if(deque.isEmpty()){
                     wr.write("1\n");
-                    break;
                 }
                 else{
                     wr.write("0\n");
@@ -81,17 +83,21 @@ public class baek10866 {
             else if(command[0].equals("front")){
                 if(deque.isEmpty()){
                     wr.write("-1\n");
-                    break;
                 }
-                wr.write(deque.peekFirst() +"\n");
+                else{
+                    wr.write(deque.peekFirst() +"\n");
+                }
+
             }
 
             else if(command[0].equals("back")){
                 if(deque.isEmpty()){
                     wr.write("-1\n");
-                    break;
                 }
-                wr.write(deque.peekLast() +"\n");
+                else{
+                    wr.write(deque.peekLast() +"\n");
+                }
+
             }
 
         }

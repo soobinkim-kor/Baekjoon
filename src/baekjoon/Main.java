@@ -9,9 +9,9 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) throws IOException {
 
-        baek10866 baek10866 = new baek10866();
+        baek1189 baek1189 = new baek1189();
 
-        baek10866.answer();
+        baek1189.answer();
     }
 }
 

@@ -25,16 +25,10 @@ public class baek1931 {
             String[] info = br.readLine().
                     split(" ");
 
-            if(info[0].equals(info[1])){
-                answer++;
-            }
+            rooms.add(new int[]{Integer.parseInt(info[0]), Integer.parseInt(info[1])});
 
-            else{
-                rooms.add(new int[]{Integer.parseInt(info[0]), Integer.parseInt(info[1])});
-            }
 
         }
-
 
 
         Collections.sort(rooms, new Comparator<int[]>() {
@@ -47,14 +41,16 @@ public class baek1931 {
             }
         });
 
-        for(int[] data:rooms){
-            System.out.println("시작 시간: "+data[0]+" 종료 시간: "+data[1]);
+        int time=0; //현재 시간
+
+        for(int i=0;i<N;i++){
+            if(rooms.get(i)[0]>=time){
+                time=rooms.get(i)[1];
+                answer++;
+            }
         }
 
-        for(int i=0;i<rooms.size();i++){
-
-        }
-
+        wr.write(answer+"");
         wr.close();
     }
 }

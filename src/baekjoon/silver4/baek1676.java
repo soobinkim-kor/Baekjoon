@@ -13,9 +13,12 @@ public class baek1676 {
                 br.readLine());
 
         int count5=0;
+
         for(int i=1;i<=N;i++){
-            if(i%5==0){
+            int num=i;
+            while(num%5==0){
                 count5++;
+                num=num/5;
             }
         }
         wr.write(count5+"");
